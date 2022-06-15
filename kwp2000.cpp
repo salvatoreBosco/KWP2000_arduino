@@ -10,7 +10,7 @@ void kwp2000_fastInit() {
   
   mS.end(); // to use pin tx as normal I / O pin it is necessary to disable the communication 
   
-  /*--------------------wake up pattern-------------------- */ 
+  /* --------------------wake up pattern-------------------- */ 
   
   pinMode(11, OUTPUT);
   digitalWrite(11, LOW);
@@ -20,7 +20,7 @@ void kwp2000_fastInit() {
   
   mS.begin(S_10k4); //re-enabled communication
 
-  /* -----------------------------send byte for StartCommunication Service----------------*/
+  /* -----------------------------send byte for StartCommunication Service---------------- */
   for (i = 0; i < 5; i++) {
     mS.write(startComm[i]);
     delay(6);
