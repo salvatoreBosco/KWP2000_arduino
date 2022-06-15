@@ -34,4 +34,6 @@ Nel file kwp2000.cpp e kwp2000.h si trovano le seguenti funzioni
  This function is used by other functions.
  So don't worry about it. :)
 
+<hr>
 
+In the KWP2000_send_message_working.ino file there is an example of the use of functions.
