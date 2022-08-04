@@ -8,4 +8,4 @@ Status PID that are running:<br>
 <br>
 For more information see the project wiki<br>
 
-<img src="main/img/FULL/100MS.BMP">
+<img src="img/FULL/100MS.BMP">
