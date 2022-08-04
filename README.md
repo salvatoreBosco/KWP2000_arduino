@@ -8,4 +8,4 @@ Status PID that are running:<br>
 <br>
 For more information see the project wiki<br>
 
-<img src="../img/FULL/25MS.bpm">
+![](img/FULL/25MS.bpm)
