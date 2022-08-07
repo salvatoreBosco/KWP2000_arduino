@@ -1,19 +1,39 @@
 #include "kwp2000.h"
 
-void initComm(){
-  SoftwareSerial mS(PIN_RX, PIN_TX); // RX, TX
+#include <SoftwareSerial.h>
+SoftwareSerial kwpS(10, 11); // RX, TX
 
-  ms.begin(S_10k4);
-}
+int bytePID[7];
 
+const char PIDlist[14][7] = {
+      {0xc2, 0x33, 0xf1, 0x01, 0x00, 0xe7},
+      {0xc2, 0x33, 0xf1, 0x01, 0x01, 0xe8},
+      {0xc2, 0x33, 0xf1, 0x01, 0x02, 0xe9},
+      {0xc2, 0x33, 0xf1, 0x01, 0x03, 0xea},
+      {0xc2, 0x33, 0xf1, 0x01, 0x04, 0xeb},
+      {0x82, 0x0a, 0xf1, 0x01, 0x05, 0x83},
+      {0xc2, 0x33, 0xf1, 0x01, 0x06, 0xed},
+      {0xc2, 0x33, 0xf1, 0x01, 0x07, 0xee},
+      {0xc2, 0x33, 0xf1, 0x01, 0x08, 0xef},
+      {0xc2, 0x33, 0xf1, 0x01, 0x09, 0xf0},
+      {0xc2, 0x33, 0xf1, 0x01, 0x0a, 0xf1},
+      {0xc2, 0x33, 0xf1, 0x01, 0x0b, 0xf2},
+      {0x82, 0x0a, 0xf1, 0x01, 0x0c, 0x8a},
+      {0x82, 0x0a, 0xf1, 0x01, 0x0d, 0x8b}
+    };
+    
 void clearMS() {
-  mS.end();
-  mS.begin(10400);
+  kwpS.end();
+  kwpS.begin(10400);
 }
 
-void kwp2000_fastInit() {
-  
-  mS.end(); // to use pin tx as normal I / O pin it is necessary to disable the communication 
+int kwp::init(int baudRate){
+  kwpS.begin(baudRate);
+}
+
+void kwp::fastInit() {
+  kwp kwp;
+  kwpS.end(); // to use pin tx as normal I / O pin it is necessary to disable the communication 
   
   /* --------------------wake up pattern-------------------- */ 
   
@@ -23,20 +43,24 @@ void kwp2000_fastInit() {
   digitalWrite(11, HIGH);
   delay(25);
   
-  mS.begin(S_10k4); //re-enabled communication
+  kwpS.begin(10400); //re-enabled communication
 
   /* -----------------------------send byte for StartCommunication Service---------------- */
-  for (i = 0; i < 5; i++) {
-    mS.write(startComm[i]);
+  for (int i = 0; i < 5; i++) {
+    kwpS.write(startComm[i]);
     delay(6);
   }
+  kwpS.end();
+  kwpS.begin(10400);
   delay(100);
+  
   clearMS();
 }
 
-float formula(char pid){
+
+float kwp::formula(char pid){
   /* calculate */
-  switch(pid){
+  switch(int(pid)){
       case 0:
         break;
       case 1:
@@ -80,17 +104,17 @@ float formula(char pid){
     }
 }
 
-float kwp2000_request(int mode, char pid) {
-
+int kwp::request(int mode, char pid){
+  
   int i;
-  kwp2000_fastInit(); //inizializza la comunicazione
+  kwp kwp;
+  kwp.fastInit(); //inizializza la comunicazione
 
   /* Send byte */
-  
   if(mode == 1){
     
     for (i = 0; i < 6; i++) {
-      mS.write(PIDlist[(int)pid][i]);
+      kwpS.write(PIDlist[(int)pid][i]);
       delay(6);
     }
   }
@@ -99,12 +123,15 @@ float kwp2000_request(int mode, char pid) {
   
 
   /* data collection */
-
+  
   i = 0;
-  while (mS.available() < 1 ) {;}
-  while (mS.available() > 0) {
-    bytePID[i] = mS.read();
+ 
+  while (kwpS.available() < 1 ){Serial.print(" ");}
+  Serial.println(" ");
+  while (kwpS.available() > 0) {
+    bytePID[i] = kwpS.read();
     i++; 
   }
-  return formula(pid);
+    
+  return kwp.formula(pid);
 }
