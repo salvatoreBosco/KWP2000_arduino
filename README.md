@@ -7,3 +7,5 @@ Status PID that are running:<br>
  - PID_13. 	VEHICLE SPEED<br>
 <br>
 For more information see the project wiki<br>
+
+<img src="img/FULL/100MS.BMP">
