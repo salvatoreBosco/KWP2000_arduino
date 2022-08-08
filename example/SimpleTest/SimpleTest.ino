@@ -9,7 +9,7 @@ void setup() {
 
 void loop() {
   kwp kwp;
-  int res = kwp.request(mode, pid); //request for pid in the chosen mode
+  int res = kwp.request(1, 13); //request for pid in the chosen mode
   Serial.println(res);
   delay(1000);
 }
