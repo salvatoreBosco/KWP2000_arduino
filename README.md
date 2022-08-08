@@ -17,7 +17,7 @@ Example of message exchange with KWP2000 protocol:<br>
 <img src="img/FULL/100MS.BMP">
 <img src="img/FULL/25MS.BMP">
 
-the messages for SERVICE are composed as follows (Exemple: StartCommunicatioService):
+the messages for SERVICE are composed as follows (Exemple: StartCommunicatioService, ReadByteByLocalIdentifier):
 
 <h3>REQUEST</h3>
  - Format byte
@@ -51,16 +51,77 @@ the messages for SERVICE are composed as follows (Exemple: StartCommunicatioServ
  - SID byte = 0x81<br>
  <img src="img/REQ_SCOM/81.BMP">
  - Parameters = NULL<br>
- - Checkbyte = 0x66<br>
+ - Checksome byte = 0x66<br>
  <img src="img/REQ_SCOM/66.BMP">
+ 
  <h1>RESPONSE</h1>
+ - Format byte = 0x83<br>
+ <img src="img/RES_SCOM/83.BMP">
+ - Target byte = 0xf1<br>
+ <img src="img/RES_SCOM/F1.BMP">
+ - Source byte = 0x10<br>
+ <img src="img/RES_SCOM/01_9.BMP">
+ - SID byte = 0xc1<br>
+ <img src="img/RES_SCOM/C1.BMP">
+ - key byte 1 = 0xe9<br>
+ <img src="img/RES_SCOM/E9.BMP">
+ - key byte 2 = 0x8f<br>
+ <img src="img/RES_SCOM/8F.BMP">
+  - Checksome byte = 0xbd<br>
+ <img src="img/RES_SCOM/BD.BMP">
+ 
  
  
  the messages for PID are composed as follows (Exemple: ENGINE SPEED, VEHICLE SPEED):
-
+ 
+ <h3>REQUEST</h3>
  - Format byte
  - Target byte
  - Source byte
- - Mode
- - Pid
- - Checsome kbyte
+ - Mode byte 
+ - Pid byte
+ - Checksome byte
+ 
+ <h3>RESPONSE</h3>
+ - Format byte
+ - Target byte
+ - Source byte
+ - SID Positive Response byte 
+ - PID Code byte
+ - Parameter value byte
+ - Checksome byte
+ <h1></h1>
+ 
+ 
+ 
+ Exemple request and response of ENGINE SPEED
+
+<h3>REQUEST</h3>
+ - Format byte = 0xc2
+ <img src="img/REQ_PID/C2.BMP">
+ - Target byte = 0x33
+ <img src="img/REQ_PID/33.BMP">
+ - Source byte = 0xf1
+ <img src="img/REQ_PID/F1.BMP">
+ - Mode byte= 0x01
+ <img src="img/REQ_PID/01.BMP">
+ - Pid byte = 0x0d
+ <img src="img/REQ_PID/0D.BMP">
+ - Checsome byte = 0xf4
+ <img src="img/REQ_PID/F4.BMP">
+ 
+ <h3>RESPONSE</h3>
+ - Format byte = 0x83
+ <img src="img/RES_PID/83.BMP">
+ - Target byte = 0xf1
+ <img src="img/RES_PID/F1.BMP">
+ - Source byte = 0x10
+ <img src="img/RES_PID/10.BMP">
+ - SID Positive Response byte = 0x41 
+ <img src="img/RES_PID/41.BMP">
+ - PID Code byte = 0x0d
+ <img src="img/RES_PID/0D.BMP">
+ - Parameter value byte = 0x00
+ <img src="img/RES_PID/00.BMP">
+ - Checksome byte = 0xd2
+ <img src="img/RES_PID/D2.BMP">
