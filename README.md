@@ -97,31 +97,38 @@ the messages for SERVICE are composed as follows (Exemple: StartCommunicatioServ
  Exemple request and response of ENGINE SPEED
 
 <h3>REQUEST</h3>
- - Format byte = 0xc2
+ - Format byte = 0xc2<br>
  <img src="img/REQ_PID/C2.BMP">
- - Target byte = 0x33
+ - Target byte = 0x33<br>
  <img src="img/REQ_PID/33.BMP">
- - Source byte = 0xf1
+ - Source byte = 0xf1<br>
  <img src="img/REQ_PID/F1.BMP">
- - Mode byte= 0x01
+ - Mode byte= 0x01<br>
  <img src="img/REQ_PID/01.BMP">
- - Pid byte = 0x0d
+ - Pid byte = 0x0d<br>
  <img src="img/REQ_PID/0D.BMP">
- - Checsome byte = 0xf4
+ - Checsome byte = 0xf4<br>
  <img src="img/REQ_PID/F4.BMP">
  
  <h3>RESPONSE</h3>
- - Format byte = 0x83
+ - Format byte = 0x83<br>
  <img src="img/RES_PID/83.BMP">
- - Target byte = 0xf1
+ - Target byte = 0xf1<br>
  <img src="img/RES_PID/F1.BMP">
- - Source byte = 0x10
+ - Source byte = 0x10<br>
  <img src="img/RES_PID/10.BMP">
- - SID Positive Response byte = 0x41 
+ - SID Positive Response byte = 0x41<br> 
  <img src="img/RES_PID/41.BMP">
- - PID Code byte = 0x0d
+ - PID Code byte = 0x0d<br>
  <img src="img/RES_PID/0D.BMP">
- - Parameter value byte = 0x00
+ - Parameter value byte = 0x00<br>
  <img src="img/RES_PID/00.BMP">
- - Checksome byte = 0xd2
+ - Checksome byte = 0xd2<br>
  <img src="img/RES_PID/D2.BMP">
+
+<h1></h1>
+
+To interface Arduino with your car you need to create a circuit that can not burn the Arduino: transforming the 12V that supplies the K line into 5V compatible with Arduino and vice versa
+
+Here you find an example:<br>
+<img src="img/Schematic/schematic.png">
