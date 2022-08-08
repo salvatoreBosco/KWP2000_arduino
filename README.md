@@ -6,7 +6,7 @@ Status PID that are running:<br>
  - PID_12.   ENGINE SPEED<br>
  - PID_13. 	VEHICLE SPEED<br>
 <br>
-Status MODE that are running:<br>
+Status SERVICE (MODE) that are running:<br>
  - MODE_1.   Show current data - I/M Monitors and Live Data<br>
 <br>
 For more information see the project wiki<br>
