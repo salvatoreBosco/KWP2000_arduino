@@ -1,6 +1,6 @@
 # KWP2000_arduino
 
-This code tries to create a library for the kwp2000 protocol for arduino.<br>
+This code tries to create an Arduino library for the kwp2000 protocol.<br>
 
 Status PID that are running:<br>
  - PID_00.   PIDs SUPPORTED<br>
