@@ -3,8 +3,21 @@
 This code tries to create a library for the kwp2000 protocol for arduino.<br>
 
 Status PID that are running:<br>
+ - PID_00.   PIDs SUPPORTED<br>
+ - PID_01.   MONITOR STATUS SINCE DTCs CLEARED<br>
+ - PID_02.   FREEZE DTCD<br>
+ - PID_03. 	 FUEL SYSTEM STATUS<br>
+ - PID_04.   CALCULATED ENGINE LOAD<br>
+ - PID_05. 	 ENGINE COOLANT TEMPERATURE<br>
+ - PID_06.   SHORT TERM FUEL TRIM-BANK 1<br>
+ - PID_07. 	 LONG TERM FUEL TRIM-BANK 1<br>
+ - PID_08.   SHORT TERM FUEL TRIM-BANK 2<br>
+ - PID_09. 	 LONG TERM FUEL TRIM-BANK 2<br>
+ - PID_10.   FUEL PRESSURE<br>
+ - PID_11. 	 INTAKE MANIFOLD ABSOLUTE PRESSUR<br>
  - PID_12.   ENGINE SPEED<br>
  - PID_13. 	VEHICLE SPEED<br>
+ - PID_14.   TIMING ADVANCE<br>
 <br>
 Status SERVICE (MODE) that are running:<br>
  - MODE_1.   Show current data - I/M Monitors and Live Data<br>
