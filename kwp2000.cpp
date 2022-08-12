@@ -3,9 +3,16 @@
 #include <SoftwareSerial.h>
 SoftwareSerial kwpS(10, 11); // RX, TX
 
-int bytePID[7];
-
-const char PIDlist[14][7] = {
+int bytePID[64];
+char FORMAT = 0xc2;
+char TARGET = 0x33;
+char SOURCE = 0xf1;
+char MODE = 0;
+char PID = 0;
+char CS = 0;
+char pidMess[7] = {FORMAT, TARGET, SOURCE, MODE, PID, CS};
+/*
+const char PIDlist[15][7] = {
       {0xc2, 0x33, 0xf1, 0x01, 0x00, 0xe7},
       {0xc2, 0x33, 0xf1, 0x01, 0x01, 0xe8},
       {0xc2, 0x33, 0xf1, 0x01, 0x02, 0xe9},
@@ -19,9 +26,10 @@ const char PIDlist[14][7] = {
       {0xc2, 0x33, 0xf1, 0x01, 0x0a, 0xf1},
       {0xc2, 0x33, 0xf1, 0x01, 0x0b, 0xf2},
       {0xc2, 0x33, 0xf1, 0x01, 0x0c, 0xf3},
-      {0xc2, 0x33, 0xf1, 0x01, 0x0d, 0xf4}
+      {0xc2, 0x33, 0xf1, 0x01, 0x0d, 0xf4},
+      {0xc2, 0x33, 0xf1, 0x01, 0x0e, 0xf5},
     };
-    
+*/
 void clearMS() {
   kwpS.end();
   kwpS.begin(10400);
@@ -99,9 +107,19 @@ float kwp::formula(char pid){
       case 13:
         return bytePID[5];
         break;
-      case 14:
+      case 14: 
+        return (bytePID[5]/2)-64;
         break;
     }
+}
+
+char calcCS(char pidMess[]){
+  int res = int(pidMess[0] + pidMess[1] + pidMess[2] + pidMess[3] + pidMess[4]);
+  while(res >= 0x100){
+    res = res - 100;
+  }
+  return char(res);
+  
 }
 
 int kwp::request(int mode, char pid){
@@ -112,9 +130,11 @@ int kwp::request(int mode, char pid){
 
   /* Send byte */
   if(mode == 1){
-    
+    pidMess[3] = char(mode);
+    pidMess[4] = pid;
+    pidMess[5] = calcCS(pidMess);
     for (i = 0; i < 6; i++) {
-      kwpS.write(PIDlist[(int)pid][i]);
+      kwpS.write(pidMess[i]);
       delay(6);
     }
   }
